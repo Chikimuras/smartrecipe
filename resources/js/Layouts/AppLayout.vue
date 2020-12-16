@@ -18,6 +18,11 @@
                                 Dashboard
                             </jet-nav-link>
                         </div>
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <jet-nav-link :href="route('recipes.index')" :active="route().current('recipes.index')">
+                                Recipes
+                            </jet-nav-link>
+                        </div>
                     </div>
 
                     <!-- Settings Dropdown -->

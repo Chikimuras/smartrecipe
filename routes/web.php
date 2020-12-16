@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RecipeController;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
+Route::get("recipes", [RecipeController::class, 'index'])->name('recipes.index');
+
+
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+
+    Route::get('/dashboard', function () {
+        return Inertia\Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::post("recipes", [RecipeController::class, 'store'])->name('recipes.store');
+});
